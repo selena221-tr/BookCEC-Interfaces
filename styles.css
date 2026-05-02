@@ -1,0 +1,296 @@
+body{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 0;
+    color: #222;
+    background-color: #fff;
+}
+
+header{
+   display: flex;
+   justify-content: space-between; /*Distribuir elementos, el de la derecha pegado a la derecha el de la izquierda a la izquierda, y el espacio entre amos se reparte*/
+   align-items: center;
+   padding: 15px 50px;
+   background-color: rgba(69, 136, 87, 0.814); 
+   position: sticky;/*Se queda pegado a la pantalla, es para que aparezca siempre*/
+   top:0; 
+   z-index: 100; /*Posicion del header, "encima de todo"*/
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    font-size: 50px;
+}
+
+.logo strong{
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+.logo img{
+    width: 90px;
+    height: 90px;
+}
+
+nav ul{
+    display: flex; 
+    list-style: none;
+    gap: 25px; 
+    margin: 0;
+    padding: 0;
+}
+nav ul li a{
+    text-decoration: none;
+}
+
+.contenedor-1{
+    background-image:  linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+    url("imagenes/cec.png");
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    height: 700px;
+    display: flex;
+    justify-content: center;  /* centra horizontal */
+    align-items: center;      /* centra vertical */
+    flex-direction: column;    
+}
+
+.contenedor-1 p{
+    margin-top: 0;
+    font-size: 100px;
+    color: white;
+}
+
+.contenedor-1 button{
+    height: 80px;
+    width: 350px;
+    background-color: #64751a;
+    border-radius: 5px;
+    color: white;
+    font-size: 30px;
+    border: 2px solid black;
+}
+
+.categories{
+    text-align: center;
+    display: flex;
+    flex-direction: column; 
+    height: 350px;  
+}
+.categories h2{
+    font-size: 50px;
+    padding: 0px 10px ;
+}
+
+.final img{
+    height: 5px;
+    width: 1800px;
+    padding: 50px 50px;
+}
+
+.part1-categories {
+    display: flex;
+    justify-content: center; /* centro horizontal */
+    align-items: center;
+}
+
+.part1-categories img{
+    display: flex;
+    align-items: center;
+    height: 5px;
+    width: 700px;
+    
+}
+.categories button{
+    padding: 20px 80px;
+    margin: 20px;
+    font-size: 30px;
+}
+
+.libros-destacados{
+    text-align: center;
+}
+
+.contenedor-libros{
+    display: flex;
+    justify-content: center;
+    gap: 20px; 
+    margin: 50px;
+    flex-wrap: wrap;
+}
+.tarjeta{
+    display: flex;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.tarjeta button{
+    height: 40px;
+    width: 150px;
+    margin: 20px ;
+}
+
+.imagen img:hover{
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+}
+
+.imagen img{
+    width: 300px;
+    height: 400px;
+    padding: 10px 20px; 
+}
+.texto {
+    
+    justify-content: center;
+    align-items: center;
+}
+.texto h3{
+    margin-top: 100px;
+}
+
+footer {
+    background-color: #3f4e23;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.contenedor-contacto{
+    display: flex;
+    justify-content: center;
+    gap: 20px; 
+    flex-wrap: wrap;
+}
+
+.tarjeta2{
+    background-color: white;
+    width: 700px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+    padding: 60px 40px; 
+    align-items: center;
+}
+
+.tarjeta2 iframe{
+    width: 600px;
+    height: 350px;
+}
+
+.contacto {
+    text-align: center;
+}
+
+
+.formulario{
+    max-width: 600px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border: 1px solid grey;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25); ;
+    padding: 20px;
+    background-color: rgb(175, 145, 145);
+}
+
+.formulario input, .formulario textarea{
+    padding: 12px;
+    border: 1px solid #4940ca;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.formulario button{
+    background-color: #8d5757;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.formulario button:hover{
+    background-color: #532c2c;
+}
+
+.login{
+    display: flex;
+}
+.campos{
+    width: 500px;
+    margin: 50px;
+    text-align: center;
+    width: 50%;
+}
+
+.campos h1{
+    font-size: 80px;
+}
+.campos p{
+    font-size: 20px; 
+}
+.img-registro{
+    background-image:  linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+    url("imagenes/cec2.png");
+    background-size: cover;
+    height: 100vh;
+    width: 60%;
+}
+
+#nuevo {
+    max-width: 600px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#nuevo input{
+    background-color: #fff;
+    margin: 10px;
+    font-size: 20px;
+    padding: 12px;
+    border: none;
+    border-bottom: 2px solid #3f4e23;;
+}
+
+#nuevo button{
+    background-color: #788d57;
+    color: white;
+    padding: 12px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.formulario button:hover{
+    background-color: #532c2c;
+}
+.redes img{
+    width: 73px;
+    height: 73px;
+}
+
+.redes {
+    display: flex; /* Activa el modo flexible */
+    align-items: center; /* Centra el texto y las imágenes verticalmente */
+    justify-content: center; /* Centra todo el contenido horizontalmente */
+    gap: 20px;
+    margin-top: 30px;
+}
+
+
+
+
+
+
+
+
+
