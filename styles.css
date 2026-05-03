@@ -68,7 +68,21 @@ nav ul li a{
     color: white;
     font-size: 30px;
     border: 2px solid black;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
 }
+
+.contenedor-1 button a {
+    text-decoration: none; 
+    color:black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
 
 .categories{
     text-align: center;
@@ -270,6 +284,7 @@ footer {
     cursor: pointer;
     transition: 0.3s;
 }
+
 .formulario button:hover{
     background-color: #532c2c;
 }
@@ -284,6 +299,15 @@ footer {
     justify-content: center; /* Centra todo el contenido horizontalmente */
     gap: 20px;
     margin-top: 30px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+#categorias {
+    display: inline-block; 
+    scroll-margin-top: 160px; /* Esto evita que el header café tape el título */
 }
 
 

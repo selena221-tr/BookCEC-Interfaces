@@ -1,0 +1,139 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f4;
+}
+
+.cosasInicio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #4a6741;
+    padding: 30px;
+    gap: 100px;
+}
+
+.cosasInicio a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 30px;
+    padding: 8px 20px;
+    border-radius: 10px;
+}
+
+.btn-crear {
+    background-color: transparent; 
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 10px;
+    font-size: 30px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-crear:hover, a:hover{
+    background-color: #385231;
+}
+
+.bienve {
+    background-color: #ffffff;
+    margin: 50px 350px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.fila-superior {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    width: 100%;
+}
+
+.libro-img {
+    width: 120px;
+    height: auto;
+}
+
+.text h1 {
+    font-size: 60px;
+    margin: 0;
+    color: #2c3e2d;
+}
+
+.text p {
+    font-size: 18px;
+    margin-top: 10px;
+    color: #4a4a4a;
+}
+
+.ingres {
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.formula {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 400px;
+}
+
+.input-group {
+    display: flex;
+    background-color: #f0f4f0; 
+    border: 1px solid #c8d1c8;
+    border-radius: 10px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.icon {
+    padding: 15px;
+    border-right: 1px solid #c8d1c8;
+    font-size: 20px;
+    color: #4a6741;
+}
+
+.input-group input {
+    border: none;
+    background: transparent;
+    padding: 15px;
+    width: 100%;
+    outline: none;
+    font-size: 16px;
+    color: #2c3e2d;
+}
+
+.checkbox-container {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #4a4a4a;
+}
+
+.btn-iniciar {
+    background-color: #4a6741;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn-iniciar:hover {
+    background-color: #385231;
+}
