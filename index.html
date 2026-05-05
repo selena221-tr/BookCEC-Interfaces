@@ -1,101 +1,141 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
     <title>BookSwipe</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
+
+    <header class="header">
         <div class="logo">
             <img src="imagenes/Bree_Serif-removebg-preview.png" alt="logo">
             <span>Book</span><strong>Swipe</strong>
         </div>
-        <input type="checkbox" id="menu-toggle">
-        <label for="menu-toggle" class="menu-icon">
-            <i class="fa-solid fa-bars"></i>
-        </label>
-        <nav>
-            <ul>
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="nosotros.html">Nosotros</a></li>
-                <li><a href="servicios.html">Servicios</a></li>
-                <li><a href="galeria.html">Galeria</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
-                <li><a href="login.html">Login</a></li>
+
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+
+                <li><a href="marketplace.html" class="btn-market">Marketplace</a></li>
+                <li><a href="login.html" class="btn-login">Login</a></li>
             </ul>
-        </nav> 
+        </nav>
     </header>
-    <main class="principal">
+
+    <main class="principal" id="inicio">
         <section class="contenedor-1">
-            <p>Compra y vende libros <br> del cec </p>
-            <button>Explorar</button>
-        </section>   
+            <h1>Compra y venta de libros del CEC</h1>
+            <p>Encuentra libros usados de inglés por nivel y ahorra dinero.</p>
+            <button class="btn-explorar">
+                <a href="#categorias">Explorar</a>
+            </button>
+        </section>
     </main>
-    <section class="categories">
-            <section class="part1-categories">
-                <p><img src="imagenes/linea.png"><h2>Categorías</h2><img src="imagenes/linea.png"></p>
-            </section>
-            <section class="botones">
-                <button>Principiante</button>
-                <button>Básico</button>
-                <button>Intermedio</button>
-                <button>Avanzado</button>
-                <button>Académico</button>
-            </section> 
-            <section class="final">
-            <img src="imagenes/linea.png">
-            </section>
-    </section> 
+
+    <section class="categories" id="categorias">
+        <h2>Categorías</h2>
+
+        <div class="botones">
+            <button>Principiante</button>
+            <button>Básico</button>
+            <button>Intermedio</button>
+            <button>Avanzado</button>
+            <button>Académico</button>
+        </div>
+    </section>
+
     <section class="libros-destacados">
         <h2>Libros Destacados</h2>
+
         <div class="contenedor-libros">
             <div class="tarjeta">
                 <div class="imagen">
-                    <img src="imagenes/libro1.png" alt="libros">
+                    <img src="imagenes/libro1.png" alt="libro">
                 </div>
                 <div class="texto">
-                    <h3> Intercambio 5.ª edición</h3>
-                    <p> Condición: Nuevo <br> Precio: $20 </p>
-                    <button>Comprar</button>
-                </div>  
-            </div>
-            <div class="tarjeta">
-                <div class="imagen">
-                    <img src="imagenes/libro1.png" alt="libros">
-                </div>
-                <div class="texto">
-                    <h3> Intercambio 5.ª edición</h3>
-                    <p> Condición: Nuevo <br> Precio: $20 </p>
-                    <button>Comprar</button>
+                    <h3>Interchange 5.ª edición</h3>
+                    <p>Condición: Nuevo <br> Precio: $10</p>
+                    <button class="btn-comprar">Comprar</button>
                 </div>
             </div>
+
             <div class="tarjeta">
                 <div class="imagen">
-                    <img src="imagenes/libro1.png" alt="libros">
+                    <img src="imagenes/libro1.png" alt="libro">
                 </div>
                 <div class="texto">
-                    <h3> Intercambio 5.ª edición</h3>
-                    <p> Condición: Nuevo <br> Precio: $20 </p>
-                    <button>Comprar</button>
+                    <h3>Interchange 5.ª edición</h3>
+                    <p>Condición: Usado <br> Precio: $25</p>
+                    <button class="btn-comprar">Comprar</button>
+                </div>
+            </div>
+
+            <div class="tarjeta">
+                <div class="imagen">
+                    <img src="imagenes/libro1.png" alt="libro">
+                </div>
+                <div class="texto">
+                    <h3>Interchange 5.ª edición</h3>
+                    <p>Condición: Como nuevo <br> Precio: $20</p>
+                    <button class="btn-comprar">Comprar</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="nosotros">
+    <section class="nosotros" id="nosotros">
+        <h2>Nosotros</h2>
+        <p>
+            BookSwipe es una plataforma creada para estudiantes del CEC - EPN con el objetivo de facilitar la compra y venta
+            de libros usados de inglés. Nuestra misión es ayudar a los estudiantes a ahorrar dinero y promover la reutilización
+            de materiales académicos.
+        </p>
     </section>
-    <section class="servicios">
-    </section>
-    <section class="contacto">
-        <h2> Contactanos </h2>
-        <div class="contenedor-contacto" id="contactanos">
-            <div class="tarjeta2">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15959.16459632906!2d-78.51722717285156!3d-0.21145414988437558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d59a252597854f%3A0x35338672db910e1b!2sCentro%20de%20Arte%20Contempor%C3%A1neo%20de%20Quito!5e0!3m2!1ses!2sec!4v1776865064788!5m2!1ses!2sec" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+    <section class="servicios" id="servicios">
+        <h2>Servicios</h2>
+
+        <div class="contenedor-servicios">
+            <div class="servicio-card">
+                <h3>Compra de libros</h3>
+                <p>Encuentra libros usados de inglés por nivel y a precios accesibles.</p>
             </div>
+
+            <div class="servicio-card">
+                <h3>Venta de libros</h3>
+                <p>Publica tu libro fácilmente y véndelo a otros estudiantes del CEC.</p>
+            </div>
+
+            <div class="servicio-card">
+                <h3>Marketplace organizado</h3>
+                <p>Filtra por niveles, precios y condición del libro.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contacto" id="contacto">
+        <h2>Contáctanos</h2>
+
+        <div class="contenedor-contacto">
             <div class="tarjeta2">
-                <form action="" class="formulario">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15959.16459632906!2d-78.51722717285156!3d-0.21145414988437558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d59a252597854f%3A0x35338672db910e1b!2sCentro%20de%20Arte%20Contempor%C3%A1neo%20de%20Quito!5e0!3m2!1ses!2sec!4v1776865064788!5m2!1ses!2sec"
+                    width="100%" 
+                    height="350" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+
+            <div class="tarjeta2">
+                <form class="formulario">
                     <input type="text" placeholder="Juan Perez" required>
                     <input type="email" placeholder="juan.perez@epn.edu.ec" required>
                     <textarea placeholder="Escriba su requerimiento o sugerencia" rows="5" required></textarea>
@@ -104,9 +144,10 @@
             </div>
         </div>
     </section>
-    <footer>
-        <p>&copy 2026 Book CEC. 
-            Todos los derechos reservados</p>
+
+    <footer class="footer">
+        <p>&copy; 2026 BookSwipe - CEC. Todos los derechos reservados.</p>
     </footer>
+
 </body>
 </html>

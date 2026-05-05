@@ -1,38 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - BookSwipe</title>
+
     <link rel="stylesheet" href="styles.css">
-    <title>inicio</title>
+    <link rel="stylesheet" href="styles-sign-in.css">
 </head>
-<body>
-    <section class="login">
-        <section class="img-registro">
-            <h1>BookCEC</h1>
-        </section>
-        <section class="campos">
-            <h1>Registrate</h1>
-            <p>Crea tu cuenta, te llevará menos de un minuto<br> Si ya tienes una cuenta <strong><a href="login.html">Inicia Sesión</a></strong></p>
-                <form action="" id="nuevo">
-                    <input type="text" placeholder="Nombres Completos" required>
-                    <input type="email" placeholder="Email" required>
-                    <input type="password" placeholder="Contraseña" required>
-                    <input type="password" placeholder="Confirmar contraseña" required>
-                    <button type="submit">¡Hecho!</button>
+<body class="login-body">
+
+    <header class="header">
+        <div class="logo">
+            <img src="imagenes/Bree_Serif-removebg-preview.png" alt="logo">
+            <span>Book</span><strong>Swipe</strong>
+        </div>
+
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="marketplace.html" class="btn-market">Marketplace</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="login-container">
+        <section class="login-card">
+
+            <div class="login-left">
+                <h1>Bienvenido a <span>BookSwipe</span></h1>
+                <p>Inicia sesión para comprar y vender libros del CEC - EPN.</p>
+                <img src="imagenes/cec2.png" alt="CEC" class="login-img">
+            </div>
+
+            <div class="login-right">
+                <h2>Iniciar Sesión</h2>
+                <p class="login-subtitle">Accede a tu cuenta en segundos.</p>
+
+                <form class="login-form">
+                    <label>Email</label>
+                    <input type="email" placeholder="ejemplo@epn.edu.ec" required>
+
+                    <label>Contraseña</label>
+                    <input type="password" placeholder="********" required>
+
+                    <div class="login-options">
+                        <label class="remember">
+                            <input type="checkbox">
+                            Recordarme
+                        </label>
+
+                        <a href="#" class="forgot">¿Olvidaste tu contraseña?</a>
+                    </div>
+
+                    <button type="submit" class="btn-login-main">Ingresar</button>
+
+                    <p class="register-text">
+                        ¿No tienes cuenta? <a href="register.html">Regístrate aquí</a>
+                    </p>
+
+                    <div class="divider">
+                        <span>o inicia con</span>
+                    </div>
+
+                    <div class="social-login">
+                        <button type="button" class="social-btn">
+                            <img src="imagenes/facebook.png" alt="Facebook">
+                            Facebook
+                        </button>
+
+                        <button type="button" class="social-btn">
+                            <img src="imagenes/google.png" alt="Google">
+                            Google
+                        </button>
+                    </div>
                 </form>
-            <section class="redes">
-                <p>O inicia Sesión con redes sociales</p>
-                <section class="iconos">
-                    <img src="imagenes/facebook.png" alt="face">
-                    <img src="imagenes/twitter.png" alt="face">
-                    <img src="imagenes/instagram.png" alt="face">
-                </section>    
-            </section>
-            
+            </div>
+
         </section>
-    </section>
-    
-    
+    </main>
+
 </body>
 </html>
