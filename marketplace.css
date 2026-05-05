@@ -1,0 +1,113 @@
+/* MARKETPLACE */
+.marketplace{
+    padding: 40px 20px;
+}
+
+.market-hero{
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.market-hero h1{
+    font-size: 45px;
+    color: #2b5c3d;
+}
+
+.market-hero p{
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+/* FILTROS */
+.market-filters{
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.search-input{
+    padding: 12px;
+    width: 250px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.filter-select{
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.btn-filtrar{
+    background: #2b5c3d;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-filtrar:hover{
+    background: #1f442c;
+}
+
+/* GRID DE LIBROS */
+.market-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    padding: 20px;
+}
+
+.market-card{
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+.market-card:hover{
+    transform: translateY(-8px);
+}
+
+.market-card img{
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.market-info{
+    padding: 15px;
+}
+
+.market-info h3{
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.price{
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #6b7f1d;
+}
+
+/* RESPONSIVE MARKETPLACE */
+@media (max-width: 900px){
+    .market-grid{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px){
+    .market-grid{
+        grid-template-columns: 1fr;
+    }
+}
