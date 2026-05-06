@@ -95,23 +95,22 @@ nav a:hover{
     justify-content: center;
     align-items: center;
     flex-direction: column;    
-    padding: 20px;
+    padding: 40px;
 }
 
 .contenedor-1 h1{
     margin-top: 0;
+    padding-bottom: 40px;
     font-size: 4rem;
     font-weight: 800;
     letter-spacing: -1px;
-}
-.contenedor-1 p{
     font-size: 90px;
     color: white;
 }
 
 .contenedor-1 button{
-    height: 80px;
-    width: 350px;
+    height: 60px;
+    width: 250px;
     background-color: #6a8f2a;
     border-radius: 12px;
     color: white;
