@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-nosotros.css">
     <title>BookCEC</title>
 </head>
 <body>
@@ -18,7 +19,7 @@
         <nav>
             <ul>
                 <li><a href="index.html">Inicio</a></li>
-                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
                 <li><a href="index.html#servicios">Servicios</a></li>
                 <li><a href="index.html#contacto">Contacto</a></li>
                 <li><a href="marketplace.html">Marketplace</a></li>
@@ -28,7 +29,7 @@
     </header>
     <main class="principal">
         <section class="contenedor-1">
-            <p>Compra y venta de libros <br> del cec </p>
+            <h1>Compra y vende libros <br> del cec </h1>
             <button><a href = "index.html#categorias">Explorar</a></button>
         </section>   
     </main>
@@ -57,7 +58,7 @@
                 <div class="texto">
                     <h3> Intercambio 5.ª edición</h3>
                     <p> Condición: Nuevo <br> Precio: $10 </p>
-                    <button>Comprar</button>
+                    <button><a href = "marketplace.html">Comprar</a></button>
                 </div>  
             </div>
             <div class="tarjeta">
@@ -67,7 +68,7 @@
                 <div class="texto">
                     <h3> Intercambio 5.ª edición</h3>
                     <p> Condición: Nuevo <br> Precio: $25 </p>
-                    <button>Comprar</button>
+                    <button><a href = "marketplace.html">Comprar</a></button>
                 </div>
             </div>
             <div class="tarjeta">
@@ -77,13 +78,46 @@
                 <div class="texto">
                     <h3> Intercambio 5.ª edición</h3>
                     <p> Condición: Nuevo <br> Precio: $20 </p>
-                    <button>Comprar</button>
+                    <button><a href = "marketplace.html">Comprar</a></button>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="nosotros">
+    <section class="nosotros" id ="nosotros">
+        <div class="nosotros-contenido">
+            
+            <div class="nosotros-header">
+                <img src="imagenes/libro.png" alt="Libro" class="libro-img">
+                <h1>Sobre Nosotros</h1>
+                <img src="imagenes/libro.png" alt="Libro" class="libro-img">
+            </div>
+
+
+            <div class="nosotros-texto">
+                <p>
+                    Bienvenido a <strong>BookCEC</strong>. Somos un proyecto nacido en la 
+                    <strong>Escuela Politécnica Nacional</strong> con el objetivo de transformar 
+                    la manera en que gestionamos el conocimiento literario.
+                </p>
+                <p>
+                    Nuestro enfoque combina la pasión por la lectura con el rigor técnico del 
+                    <strong>Desarrollo de Software</strong>, buscando siempre soluciones 
+                    creativas a problemas complejos.
+                </p>
+            </div>
+
+            <div class="valores-caja">
+                <h3>Nuestros Pilares</h3>
+                <ul>
+                    <li>📖 <strong>Arquitectura Eficiente:</strong> Desarrollo de soluciones lógicas y escalables.</li>
+                    <li>🤝 <strong>Trabajo en Equipo:</strong> Colaboración para mejores resultados.</li>
+                    <li>💬 <strong>Comunicación Asertiva:</strong> Entendemos tus necesidades.</li>
+                    <li>🛠️ <strong>Resolución de Problemas:</strong> Eficiencia garantizada.</li>
+                </ul>
+            </div>
+
+        </div>
     </section>
      <section class="servicios" id="servicios">
         <h2>Servicios</h2>

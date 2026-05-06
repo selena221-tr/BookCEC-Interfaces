@@ -10,7 +10,7 @@ header{
    justify-content: space-between; /*Distribuir elementos, el de la derecha pegado a la derecha el de la izquierda a la izquierda, y el espacio entre amos se reparte*/
    align-items: center;
    padding: 15px 50px;
-   background-color: rgba(69, 136, 87, 0.814); 
+   background-color: rgba(52, 101, 65, 0.814); 
    position: sticky;/*Se queda pegado a la pantalla, es para que aparezca siempre*/
    top:0; 
    z-index: 100; /*Posicion del header, "encima de todo"*/
@@ -30,19 +30,39 @@ header{
     height: 90px;
 }
 
+#nosotros{
+    padding-top: 100px;
+}
+#servicios{
+    padding-top: 100px;
+  margin-top: -90px;
+}
+
+
+
+
 nav ul{
     display: flex; 
     list-style: none;
-    gap: 25px; 
+    gap: 50px; 
     margin: 0;
-    padding: 0;
+    padding: 0px;
 }
 nav ul li a{
     text-decoration: none;
+    color: white;
+    font-size: 25px;
+    transition: color 0.3s ease;
+    gap: 20px;
+}
+nav a:hover{
+    border-radius: 15px;
+    padding: 15px;
+    background-color: #334d2d;
 }
 
 .contenedor-1{
-    background-image:  linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+    background-image:  linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
     url("imagenes/cec.png");
     background-size: cover;
     background-position: center;
@@ -54,23 +74,35 @@ nav ul li a{
     flex-direction: column;    
 }
 
-.contenedor-1 p{
+.contenedor-1 h1{
     margin-top: 0;
-    font-size: 100px;
+    font-size: 4rem;
+    font-weight: 800;
+    letter-spacing: -1px;
     color: white;
 }
 
 .contenedor-1 button{
     height: 80px;
     width: 350px;
-    background-color: #64751a;
-    border-radius: 5px;
+    background-color: #6a8f2a;
+    border-radius: 12px;
     color: white;
     font-size: 30px;
-    border: 2px solid black;
-    padding: 0;
+    padding: 16px 40px;
     justify-content: center;
     align-items: center;
+    transform: translateY(-2px);
+    font-weight: 600;
+    border: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.contenedor-1 button:hover {
+  transform: translateY(-3px);
+  background-color: #4f6d1f;
+
 }
 
 .contenedor-1 button a {
@@ -118,10 +150,16 @@ nav ul li a{
     padding: 20px 80px;
     margin: 20px;
     font-size: 30px;
+    background-color: #8bae4dc3;
+    border-radius: 15px;
 }
 
 .libros-destacados{
     text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
 
 .contenedor-libros{
@@ -161,6 +199,23 @@ nav ul li a{
 }
 .texto h3{
     margin-top: 100px;
+}
+.texto button{
+    border-radius: 10px;
+    background-color: #5c7b2aad;
+    color: white;
+    font-weight: 50;
+    border: none;
+}
+
+.texto button:hover{
+    background-color: #334d2d;
+    transform: translateY(-2px);
+}
+
+.texto a{
+    color: #fff;
+    text-decoration: none;
 }
 /* SERVICIOS */
 .servicios{
@@ -239,7 +294,7 @@ footer {
     border-radius: 8px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25); ;
     padding: 20px;
-    background-color: rgb(175, 145, 145);
+    background-color: #3f4e23;
 }
 
 .formulario input, .formulario textarea{
@@ -250,7 +305,7 @@ footer {
 }
 
 .formulario button{
-    background-color: #8d5757;
+    background-color: rgba(69, 136, 87, 0.814);
     color: white;
     padding: 12px;
     border: none;
@@ -260,15 +315,14 @@ footer {
     transition: 0.3s;
 }
 .formulario button:hover{
-    background-color: #532c2c;
+    background-color: #3f4e23;
 }
 
 .login{
     display: flex;
 }
 .campos{
-    width: 500px;
-    margin: 50px;
+    margin: 0px;
     text-align: center;
     width: 50%;
 }
@@ -283,7 +337,7 @@ footer {
     background-image:  linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
     url("imagenes/cec2.png");
     background-size: cover;
-    height: 100vh;
+    height: 87vh;
     width: 60%;
 }
 
