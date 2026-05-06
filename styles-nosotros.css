@@ -112,3 +112,127 @@
 #categorias {
     scroll-margin-top: 100px; 
 }
+/* ============================= */
+/* RESPONSIVE TABLET (601px - 1024px) */
+/* ============================= */
+@media (min-width: 601px) and (max-width: 1024px) {
+
+    .cosasInicio {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .logo {
+        font-size: 28px;
+    }
+
+    .navegacion {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .cosasInicio a,
+    .btn-crear {
+        font-size: 18px;
+        padding: 10px 20px;
+    }
+
+    .nosotros-seccion {
+        padding: 40px 20px;
+    }
+
+    .nosotros-contenido {
+        width: 80%;
+        padding: 30px;
+    }
+
+    .nosotros-header h1 {
+        font-size: 40px;
+    }
+
+    .libro-img {
+        width: 60px;
+    }
+
+    .nosotros-texto {
+        font-size: 17px;
+    }
+
+    .valores-caja {
+        width: 95%;
+        padding: 20px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .cosasInicio {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+        text-align: center;
+    }
+
+    .logo {
+        font-size: 24px;
+    }
+
+    .navegacion {
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+    }
+
+    .cosasInicio a,
+    .btn-crear {
+        font-size: 16px;
+        padding: 10px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .nosotros-seccion {
+        padding: 30px 15px;
+    }
+
+    .nosotros-contenido {
+        width: 100%;
+        padding: 20px;
+        border-radius: 15px;
+    }
+
+    .nosotros-header {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .nosotros-header h1 {
+        font-size: 32px;
+    }
+
+    .libro-img {
+        width: 50px;
+    }
+
+    .nosotros-texto {
+        font-size: 16px;
+    }
+
+    .valores-caja {
+        width: 100%;
+        padding: 18px;
+        border-radius: 12px;
+    }
+
+    .valores-caja h3 {
+        font-size: 22px;
+    }
+
+    .valores-caja li {
+        font-size: 16px;
+    }
+}

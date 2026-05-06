@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +8,12 @@
     <link rel="stylesheet" href="styles-nosotros.css">
     <title>BookCEC</title>
 </head>
+
 <body>
     <header>
         <div class="logo">
             <img src="imagenes/logo.png" alt="logo">
-            <span><label id = "book">Book</label></span><strong>CEC</strong>
+            <span><label id="book">Book</label></span><strong>CEC</strong>
         </div>
         <label for="menu-toggle" class="menu-icon">
             <i class="fa-solid fa-bars"></i>
@@ -25,29 +27,34 @@
                 <li><a href="marketplace.html">Marketplace</a></li>
                 <li><a href="sign_in.html">Login</a></li>
             </ul>
-        </nav> 
+        </nav>
     </header>
     <main class="principal">
         <section class="contenedor-1">
             <h1>Compra y vende libros <br> del cec </h1>
             <button><a href = "index.html#categorias">Explorar</a></button>
         </section>   
+            <p>Compra y venta de libros <br> del cec </p>
+            <button><a href="index.html#categorias">Explorar</a></button>
+        </section>
     </main>
     <section class="categories">
-            <section class="part1-categories">
-                <p><img src="imagenes/linea.png"><h2><label id = "categorias">Categorías</label></h2><img src="imagenes/linea.png"></p>
-            </section>
-            <section class="botones">
-                <button>Principiante</button>
-                <button>Básico</button>
-                <button>Intermedio</button>
-                <button>Avanzado</button>
-                <button>Académico</button>
-            </section> 
-            <section class="final">
+        <section class="part1-categories">
             <img src="imagenes/linea.png">
-            </section>
-    </section> 
+            <h2 id="categorias">Categorías</h2>
+            <img src="imagenes/linea.png">
+        </section>
+        <section class="botones">
+            <button>Principiante</button>
+            <button>Básico</button>
+            <button>Intermedio</button>
+            <button>Avanzado</button>
+            <button>Académico</button>
+        </section>
+        <section class="final">
+            <img src="imagenes/linea.png">
+        </section>
+    </section>
     <section class="libros-destacados">
         <h2>Libros Destacados</h2>
         <div class="contenedor-libros">
@@ -60,6 +67,8 @@
                     <p> Condición: Nuevo <br> Precio: $10 </p>
                     <button><a href = "marketplace.html">Comprar</a></button>
                 </div>  
+                    <button>Comprar</button>
+                </div>
             </div>
             <div class="tarjeta">
                 <div class="imagen">
@@ -119,7 +128,7 @@
 
         </div>
     </section>
-     <section class="servicios" id="servicios">
+    <section class="servicios" id="servicios">
         <h2>Servicios</h2>
 
         <div class="contenedor-servicios">
@@ -143,7 +152,10 @@
         <h2> Contactanos </h2>
         <div class="contenedor-contacto" id="contactanos">
             <div class="tarjeta2">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15959.16459632906!2d-78.51722717285156!3d-0.21145414988437558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d59a252597854f%3A0x35338672db910e1b!2sCentro%20de%20Arte%20Contempor%C3%A1neo%20de%20Quito!5e0!3m2!1ses!2sec!4v1776865064788!5m2!1ses!2sec" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15959.16459632906!2d-78.51722717285156!3d-0.21145414988437558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d59a252597854f%3A0x35338672db910e1b!2sCentro%20de%20Arte%20Contempor%C3%A1neo%20de%20Quito!5e0!3m2!1ses!2sec!4v1776865064788!5m2!1ses!2sec"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
             <div class="tarjeta2">
                 <form action="" class="formulario">
@@ -156,8 +168,9 @@
         </div>
     </section>
     <footer>
-        <p>&copy 2026 Book CEC. 
+        <p>&copy 2026 Book CEC.
             Todos los derechos reservados</p>
     </footer>
 </body>
+
 </html>
