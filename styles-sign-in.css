@@ -137,3 +137,94 @@ body {
 .btn-iniciar:hover {
     background-color: #385231;
 }
+/* TABLET */
+@media (max-width: 1024px){
+
+    .cosasInicio{
+        flex-wrap: wrap;
+        gap: 30px;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .cosasInicio a{
+        font-size: 22px;
+    }
+
+    .btn-crear{
+        font-size: 22px;
+    }
+
+    .bienve{
+        margin: 40px 100px;
+        padding: 30px;
+    }
+
+    .text h1{
+        font-size: 45px;
+    }
+
+    .formula{
+        width: 100%;
+        max-width: 400px;
+    }
+}
+/*CELULAR */
+@media (max-width: 600px){
+
+    .cosasInicio{
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+    }
+
+    .cosasInicio a{
+        font-size: 18px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .btn-crear{
+        font-size: 18px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .bienve{
+        margin: 20px;
+        padding: 20px;
+    }
+
+    .fila-superior{
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .libro-img{
+        width: 80px;
+    }
+
+    .text h1{
+        font-size: 35px;
+        text-align: center;
+    }
+
+    .text p{
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .formula{
+        width: 100%;
+    }
+
+    .input-group input{
+        font-size: 14px;
+    }
+
+    .btn-iniciar{
+        width: 100%;
+        font-size: 16px;
+        padding: 12px;
+    }
+}
