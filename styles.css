@@ -20,18 +20,22 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 50px;
-    background-color: rgba(69, 136, 87, 0.814);
+    padding: 12px 30px;;
+    background-color: #4a6741;
     position: sticky;
     top: 0;
     z-index: 100;
+    /* EXTRA: Asegura que el header mantenga su tamaño real y no se comprima */
+    flex-shrink: 0;
 }
 
 .logo {
     display: flex;
     align-items: center;
-    font-size: 50px;
+    font-size: 30px;
     gap: 10px;
+    /* Forzamos a que el texto del logo no tenga alturas de línea extra */
+    line-height: 1; 
 }
 
 .logo strong {
@@ -39,27 +43,56 @@ header {
 }
 
 .logo img {
-    width: 90px;
-    height: 90px;
+    width: 60px;
+    height: 60px;
 }
 
+.carousel {
+    margin-top: 10px; /* Asegúrate de resetearlo por si acaso */
+    padding-top: 0;
+}
+
+
+.carousel-item img {
+    /* Esto asegura que la imagen se adapte al contenedor sin deformarse */
+    object-fit: cover; 
+}
 /* NAV NORMAL PC */
 nav {
-    display: block;
+    display: flex;
+    align-items: center;
 }
 
 nav ul {
     display: flex;
     list-style: none;
-    gap: 25px;
+    gap: 25px;/* Eliminamos los márgenes y paddings por defecto del navegador */
+    margin: 0;
+    padding: 0;
+    align-items: center; /* Asegura que todos los <li> se alineen horizontalmente */
 }
 
 nav ul li a {
     text-decoration: none;
-    color: black;
+    color: rgb(255, 255, 255);
     font-size: 18px;
+    line-height: 1;
     font-weight: bold;
+    display: inline-block; /* Ayuda a que respete el line-height de forma estricta */
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 16px; 
+    border-radius: 10px;
+    transition: background-color 0.3s;
 }
+
+nav ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+
+
 /* MENU HAMBURGUESA */
 #menu-toggle {
     display: none;
@@ -71,53 +104,70 @@ nav ul li a {
     cursor: pointer;
     color: white;
 }
-/* MAIN*/
-.contenedor-1 {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-        url("imagenes/cec.png");
-    background-size: cover;
-    background-position: center;
-    text-align: center;
-    height: 700px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 20px;
+
+.principal .carousel-item {
+    height: 570px; /*  PARA CAMBIAR LA ALTURA EN PC */
 }
 
-.contenedor-1 p {
-    font-size: 90px;
-    color: white;
+
+.carousel-item img{
+        height: 570px;
+        object-fit: cover;
+    }
+
+.carousel-item{
+    position: relative;
 }
 
-.contenedor-1 button {
-    height: 80px;
-    width: 350px;
-    background-color: #64751a;
-    border-radius: 5px;
-    color: white;
-    font-size: 30px;
-    border: 2px solid black;
-    margin-top: 20px;
-    cursor: pointer;
+#b1{
+    position: absolute;
+    top: 90%;
+    left: 76%;
 }
 
-.contenedor-1 button a {
+.mi_boton a{
     text-decoration: none;
-    color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
+    color: inherit;
 }
+
+.mi_boton {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+
+    /* Estilos base del botón */
+    background-color: #2b5736; /* Mantenemos el color verde oscuro */
+    color: #ffffff;            /* ¡Importante! Cambiar letras a blanco */
+    padding: 12px 28px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 800; /* Letra extra gruesa (strong) */
+    
+    /* EL TOQUE DE RESALTE: Borde amarillo neón y sombra brillante */
+    border: 3px solid #1e1c19; /* Usamos el amarillo del logotipo */
+    box-shadow: 0 0 15px rgba(165, 241, 52, 0.7); /* Una sombra resplandeciente amarilla */
+    
+    /* Transición suave para el efecto hover */
+    transition: all 0.3s ease;
+}
+
+/* Efecto al pasar el mouse (hover) para que se vea interactivo */
+.mi_boton:hover {
+    background-color: #f1b434; /* Fondo amarillo */
+    color: #2b5736;            /* Letras verde oscuro */
+    box-shadow: 0 0 25px rgba(241, 180, 52, 0.9); /* Sombra brillante más intensa */
+}
+
 /* CATEGORIES */
 .categories {
     text-align: center;
     display: flex;
     flex-direction: column;
     padding: 30px 0;
+    scroll-margin-top: 90px;
 }
 
 .categories h2 {
@@ -138,12 +188,38 @@ nav ul li a {
     min-width: 100px;
 }
 
-.categories button {
-    padding: 20px 80px;
-    margin: 15px;
-    font-size: 30px;
-    cursor: pointer;
+.botones{
+    display: flex;
+    flex-wrap: wrap;       /* Permite que los elementos bajen si no entran en la pantalla */
+    justify-content: center; /* Centra los elementos */
+    gap: 30px;             /* Añade 20px de separación tanto horizontal como vertical */
+
 }
+
+.botones button {
+    background-color: #7d9c20ba; /* Mantenemos el color verde oscuro */
+    color: #0f0e0e;            /* ¡Importante! Cambiar letras a blanco */
+    padding: 12px 28px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500; /* Letra extra gruesa (strong) */
+    width: 200px;
+    
+    /* EL TOQUE DE RESALTE: Borde amarillo neón y sombra brillante */
+    border: 3px solid #1c1b1a; /* Usamos el amarillo del logotipo */
+    box-shadow: 0 0 15px rgba(38, 39, 33, 0.7); /* Una sombra resplandeciente amarilla */
+    
+    /* Transición suave para el efecto hover */
+    transition: all 0.3s ease;
+
+}
+.botones button:hover{
+    background-color: #2f3a0bba; /* Mantenemos el color verde oscuro */
+    color: #f5eded;   
+}
+
+
 
 .final img {
     height: 5px;
@@ -155,20 +231,26 @@ nav ul li a {
 /* LIBROS*/
 .libros-destacados {
     text-align: center;
-    padding: 40px 20px;
+    padding: 10px 20px 40px 20px;
+    
 }
 
 .libros-destacados h2 {
     font-size: 45px;
-    margin-bottom: 30px;
+    margin-bottom: 0px;
+    padding: 20px;
+    background-color: #235830d1;
+    color: #ffffff;
 }
 
 .contenedor-libros {
     display: flex;
     justify-content: center;
     gap: 20px;
-    margin: 20px;
+    margin: auto;
+    padding: 40px;
     flex-wrap: wrap;
+    background-color: #fcfffdf7;
 }
 
 .tarjeta {
@@ -177,7 +259,7 @@ nav ul li a {
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s, box-shadow 0.3s;
-    width: 520px;
+    width: 320px;
     max-width: 100%;
     padding: 15px;
     flex-wrap: wrap;
@@ -214,17 +296,26 @@ nav ul li a {
     width: 150px;
     margin-top: 20px;
     cursor: pointer;
+    background-color: #1c3a12ba; /* Mantenemos el color verde oscuro */
+    color: #ffffff;
+    border-radius: 8px;
+}
+
+.tarjeta button:hover{
+    background-color: #839c32ba; /* Mantenemos el color verde oscuro */
+    color: #151515;   
 }
 
 /* SERVICIOS */
 .servicios {
-    padding: 60px 30px;
+    padding: 10px 20px 40px 20px;
     text-align: center;
+    background-color:#235830d1 ;
 }
 
 .servicios h2 {
     font-size: 40px;
-    color: #2b5c3d;
+    color: #fbfbfb;
     margin-bottom: 30px;
 }
 
@@ -290,7 +381,7 @@ nav ul li a {
     border-radius: 8px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
     padding: 20px;
-    background-color: rgb(175, 145, 145);
+    background-color: rgb(66, 98, 48);
 }
 
 .formulario input,
@@ -302,7 +393,7 @@ nav ul li a {
 }
 
 .formulario button {
-    background-color: #8d5757;
+    background-color: #697842;
     color: white;
     padding: 12px;
     border: none;
@@ -336,7 +427,7 @@ nav ul li a {
 }
 
 .img-registro {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
         url("imagenes/cec2.png");
     background-size: cover;
     background-position: center;

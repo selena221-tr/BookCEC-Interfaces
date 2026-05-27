@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #f4f7f4;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url('imagenes/c3.png');
 }
 
 .cosasInicio {
@@ -9,17 +9,29 @@ body {
     justify-content: center;
     align-items: center;
     background-color: #4a6741;
-    padding: 30px;
-    gap: 100px;
+    padding: 12px 30px;
+    
+    /* REDUCIMOS EL GAP: Al achicar la letra, un espacio de 40px o 50px es ideal */
+    gap: 50px; 
 }
 
 .cosasInicio a {
     color: white;
     text-decoration: none;
     font-weight: bold;
-    font-size: 30px;
-    padding: 8px 20px;
+    
+    /* CAMBIO CLAVE: Tamaño estándar profesional para menús (entre 16px y 18px) */
+    font-size: 18px; 
+    
+    /* Un padding más sutil para el efecto de botón flotante */
+    padding: 8px 16px; 
     border-radius: 10px;
+    transition: background-color 0.3s; /* Para que cambie suave si le agregas un :hover */
+}
+
+/* Opcional: Un efecto genial para cuando pasen el mouse por encima */
+.cosasInicio a:hover {
+    background-color: rgba(255, 255, 255, 0.15);
 }
 
 .btn-crear {
@@ -63,7 +75,7 @@ body {
 
 .text h1 {
     font-size: 60px;
-    margin: 0;
+    margin-left: 10%;
     color: #2c3e2d;
 }
 

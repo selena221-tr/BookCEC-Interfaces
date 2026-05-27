@@ -1,10 +1,63 @@
+body{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),url('imagenes/nosotros.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
 
 .cosasInicio {
+    position: fixed;
     display: flex;
-    justify-content: space-between; 
+    justify-content: center;
     align-items: center;
     background-color: #4a6741;
-    padding: 20px;
+    padding: 12px 30px;
+    position: sticky;
+    top: 0; /* Obligatorio: le dice en qué punto de la pantalla debe empezar a pegarse */
+    z-index: 1000;
+    /* REDUCIMOS EL GAP: Al achicar la letra, un espacio de 40px o 50px es ideal */
+    gap: 50px; 
+}
+.cosasInicio a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    
+    /* CAMBIO CLAVE: Tamaño estándar profesional para menús (entre 16px y 18px) */
+    font-size: 18px; 
+    
+    /* Un padding más sutil para el efecto de botón flotante */
+    padding: 8px 16px; 
+    border-radius: 10px;
+    transition: background-color 0.3s; /* Para que cambie suave si le agregas un :hover */
+}
+
+/* Opcional: Un efecto genial para cuando pasen el mouse por encima */
+.cosasInicio a:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 30px;
+    gap: 10px;
+    /* Forzamos a que el texto del logo no tenga alturas de línea extra */
+    line-height: 1; 
+}
+#book{
+    color: white;
+}
+.logo strong {
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.logo img {
+    width: 60px;
+    height: 60px;
 }
 
 .nosotros{
@@ -18,15 +71,6 @@
     display: flex;
     align-items: center;
     gap: 40px;
-}
-
-.cosasInicio a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 20px;
-    padding: 10px 25px;
-    border-radius: 12px;
 }
 
 .btn-crear {
