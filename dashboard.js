@@ -9,6 +9,7 @@ let ventasChart;      // Guarda la referencia del gráfico
 document.addEventListener("DOMContentLoaded", () => {
     booksData = obtenerLibros(); // Carga los libros almacenados
 
+    setupSesion(); // Muestra el usuario activo y habilita "Cerrar Sesión"
     renderCards(); // Actualiza las tarjetas
     renderTabla(booksData); // Muestra la tabla
     renderChart(booksData); // Genera el gráfico
@@ -228,5 +229,29 @@ function setupSidebarActivo() {
             links.forEach(l => l.classList.remove("active-link")); // Quita el enlace activo
             link.classList.add("active-link"); // Activa el enlace seleccionado
         });
+    });
+}
+
+/* ---------- 8. SESIÓN (usuario activo + cerrar sesión) ---------- */
+
+function setupSesion() {
+    const nombreEl = document.getElementById("nombreUsuarioTopbar"); // Elemento del topbar
+    const logoutBtn = document.getElementById("btnCerrarSesion"); // Link de cerrar sesión
+
+    const usuarioGuardado = localStorage.getItem("bookcecUsuarioActivo"); // Lee la sesión
+
+    if (usuarioGuardado && nombreEl) {
+        try {
+            const usuario = JSON.parse(usuarioGuardado); // Convierte el JSON
+            nombreEl.textContent = usuario.nombre; // Muestra el nombre real
+        } catch (e) {
+            console.warn("No se pudo leer el usuario activo.", e); // Informa el error
+        }
+    }
+
+    logoutBtn?.addEventListener("click", (e) => {
+        e.preventDefault(); // Evita navegar al "#"
+        localStorage.removeItem("bookcecUsuarioActivo"); // Cierra la sesión
+        window.location.href = "sign_in.html"; // Regresa al login
     });
 }
