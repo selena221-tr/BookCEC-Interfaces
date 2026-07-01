@@ -19,12 +19,15 @@ function renderGrid(data) {
     const grid = document.getElementById("marketGrid"); // Obtiene el contenedor
     if (!grid) return; // Verifica que exista
 
-    if (data.length === 0) {
+    // FILTRO ADICIONADO: Oculta los libros cuyo estado sea "Pendiente"
+    const librosVisibles = data.filter(libro => libro.estado !== "Pendiente");
+
+    if (librosVisibles.length === 0) {
         grid.innerHTML = `<p class="text-center">No se encontraron libros con esos criterios.</p>`; // Mensaje sin resultados
         return;
     }
 
-    grid.innerHTML = data.map(libro => `
+    grid.innerHTML = librosVisibles.map(libro => `
         <div class="market-card">
             <img src="${libro.imagen || 'imagenes/libro1.png'}" alt="${libro.nombre}"> <!-- Imagen del libro -->
             <div class="market-info">
