@@ -32,11 +32,29 @@
         <section class="campos">
             <h1>Registrate</h1>
             <p>Crea tu cuenta, te llevará menos de un minuto<br> Si ya tienes una cuenta <strong><a href="sign_in.html">Inicia Sesión</a></strong></p>
-                <form action="" id="nuevo">
-                    <input type="text" placeholder="Nombres Completos" required>
-                    <input type="email" placeholder="Email" required>
-                    <input type="password" placeholder="Contraseña" required>
-                    <input type="password" placeholder="Confirmar contraseña" required>
+                <form action="" id="nuevo" novalidate>
+                    <div class="campo-grupo">
+                        <input type="text" id="nombre" placeholder="Nombres Completos">
+                        <small class="error-msg" id="error-nombre"></small>
+                    </div>
+
+                    <div class="campo-grupo">
+                        <input type="email" id="email" placeholder="Email">
+                        <small class="error-msg" id="error-email"></small>
+                    </div>
+
+                    <div class="campo-grupo">
+                        <input type="password" id="password" placeholder="Contraseña">
+                        <small class="error-msg" id="error-password"></small>
+                    </div>
+
+                    <div class="campo-grupo">
+                        <input type="password" id="confirmPassword" placeholder="Confirmar contraseña">
+                        <small class="error-msg" id="error-confirmPassword"></small>
+                    </div>
+
+                    <p class="mensaje-form" id="mensaje-registro"></p>
+
                     <button type="submit">¡Hecho!</button>
                 </form>
             <section class="redes">
@@ -50,7 +68,129 @@
             
         </section>
     </section>
-    
-    
+
+    <script>
+        const formRegistro = document.getElementById('nuevo');
+
+        const campoNombre = document.getElementById('nombre');
+        const campoEmail = document.getElementById('email');
+        const campoPassword = document.getElementById('password');
+        const campoConfirmPassword = document.getElementById('confirmPassword');
+        const mensajeRegistro = document.getElementById('mensaje-registro');
+
+        const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const regexNombre = /^[A-Za-zÁÉÍÓÚÑáéíóúñ\s]{3,}$/;
+
+        function mostrarError(input, idError, texto) {
+            document.getElementById(idError).textContent = texto;
+            input.classList.add('input-invalido');
+        }
+
+        function limpiarError(input, idError) {
+            document.getElementById(idError).textContent = '';
+            input.classList.remove('input-invalido');
+        }
+
+        function validarNombre() {
+            const valor = campoNombre.value.trim();
+            if (valor === '') {
+                mostrarError(campoNombre, 'error-nombre', 'El nombre es obligatorio.');
+                return false;
+            }
+            if (!regexNombre.test(valor)) {
+                mostrarError(campoNombre, 'error-nombre', 'Ingrese un nombre válido (mínimo 3 letras, sin números).');
+                return false;
+            }
+            limpiarError(campoNombre, 'error-nombre');
+            return true;
+        }
+
+        function validarEmail() {
+            const valor = campoEmail.value.trim();
+            if (valor === '') {
+                mostrarError(campoEmail, 'error-email', 'El correo es obligatorio.');
+                return false;
+            }
+            if (!regexEmail.test(valor)) {
+                mostrarError(campoEmail, 'error-email', 'Ingrese un correo electrónico válido.');
+                return false;
+            }
+
+            const usuarios = JSON.parse(localStorage.getItem('bookcecUsuarios')) || [];
+            const existe = usuarios.some(u => u.email.toLowerCase() === valor.toLowerCase());
+            if (existe) {
+                mostrarError(campoEmail, 'error-email', 'Este correo ya está registrado.');
+                return false;
+            }
+
+            limpiarError(campoEmail, 'error-email');
+            return true;
+        }
+
+        function validarPassword() {
+            const valor = campoPassword.value;
+            if (valor === '') {
+                mostrarError(campoPassword, 'error-password', 'La contraseña es obligatoria.');
+                return false;
+            }
+            if (valor.length < 6) {
+                mostrarError(campoPassword, 'error-password', 'Debe tener al menos 6 caracteres.');
+                return false;
+            }
+            limpiarError(campoPassword, 'error-password');
+            return true;
+        }
+
+        function validarConfirmPassword() {
+            const valor = campoConfirmPassword.value;
+            if (valor === '') {
+                mostrarError(campoConfirmPassword, 'error-confirmPassword', 'Confirme su contraseña.');
+                return false;
+            }
+            if (valor !== campoPassword.value) {
+                mostrarError(campoConfirmPassword, 'error-confirmPassword', 'Las contraseñas no coinciden.');
+                return false;
+            }
+            limpiarError(campoConfirmPassword, 'error-confirmPassword');
+            return true;
+        }
+
+        // Validación en tiempo real
+        campoNombre.addEventListener('input', validarNombre);
+        campoEmail.addEventListener('input', validarEmail);
+        campoPassword.addEventListener('input', validarPassword);
+        campoConfirmPassword.addEventListener('input', validarConfirmPassword);
+
+        formRegistro.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const nombreOk = validarNombre();
+            const emailOk = validarEmail();
+            const passwordOk = validarPassword();
+            const confirmOk = validarConfirmPassword();
+
+            if (!(nombreOk && emailOk && passwordOk && confirmOk)) {
+                mensajeRegistro.textContent = 'Por favor corrige los errores del formulario.';
+                mensajeRegistro.className = 'mensaje-form fallo';
+                return;
+            }
+
+            const usuarios = JSON.parse(localStorage.getItem('bookcecUsuarios')) || [];
+            usuarios.push({
+                nombre: campoNombre.value.trim(),
+                email: campoEmail.value.trim(),
+                password: campoPassword.value
+            });
+            localStorage.setItem('bookcecUsuarios', JSON.stringify(usuarios));
+
+            mensajeRegistro.textContent = '¡Cuenta creada con éxito! Redirigiendo a inicio de sesión...';
+            mensajeRegistro.className = 'mensaje-form exito';
+            formRegistro.reset();
+
+            setTimeout(() => {
+                window.location.href = 'sign_in.html';
+            }, 1500);
+        });
+    </script>
 </body>
 </html>

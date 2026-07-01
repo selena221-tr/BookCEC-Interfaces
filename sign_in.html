@@ -25,22 +25,113 @@
         </div>
 
         <div class="ingres">
-            <form class="formula">
+            <form class="formula" id="formLogin" novalidate>
                 <div class="input-group">
                     <span class="icon">✉</span>
-                    <input type="email" placeholder="Ingrese su correo electrónico">
+                    <input type="email" id="loginEmail" placeholder="Ingrese su correo electrónico">
                 </div>
-                
+                <small class="error-msg" id="error-loginEmail"></small>
+
                 <div class="input-group">
                     <span class="icon">🔒</span>
-                    <input type="password" placeholder="Ingrese su contraseña">
+                    <input type="password" id="loginPassword" placeholder="Ingrese su contraseña">
                 </div>
+                <small class="error-msg" id="error-loginPassword"></small>
 
-                <label class="checkbox-container"><input type="checkbox"> Sesion iniciada</label>
+                <label class="checkbox-container"><input type="checkbox" id="recordarme"> Sesion iniciada</label>
+
+                <p class="mensaje-form" id="mensaje-login"></p>
 
                 <button type="submit" class="btn-iniciar">Iniciar sesión ✎</button>
             </form>
         </div>
     </main>
+
+    <script>
+        const formLogin = document.getElementById('formLogin');
+        const campoEmail = document.getElementById('loginEmail');
+        const campoPassword = document.getElementById('loginPassword');
+        const mensajeLogin = document.getElementById('mensaje-login');
+
+        const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        function mostrarError(grupo, idError, texto) {
+            document.getElementById(idError).textContent = texto;
+            grupo.classList.add('input-invalido');
+        }
+
+        function limpiarError(grupo, idError) {
+            document.getElementById(idError).textContent = '';
+            grupo.classList.remove('input-invalido');
+        }
+
+        function validarEmail() {
+            const grupo = campoEmail.closest('.input-group');
+            const valor = campoEmail.value.trim();
+            if (valor === '') {
+                mostrarError(grupo, 'error-loginEmail', 'El correo es obligatorio.');
+                return false;
+            }
+            if (!regexEmail.test(valor)) {
+                mostrarError(grupo, 'error-loginEmail', 'Ingrese un correo electrónico válido.');
+                return false;
+            }
+            limpiarError(grupo, 'error-loginEmail');
+            return true;
+        }
+
+        function validarPassword() {
+            const grupo = campoPassword.closest('.input-group');
+            const valor = campoPassword.value;
+            if (valor === '') {
+                mostrarError(grupo, 'error-loginPassword', 'La contraseña es obligatoria.');
+                return false;
+            }
+            limpiarError(grupo, 'error-loginPassword');
+            return true;
+        }
+
+        campoEmail.addEventListener('input', validarEmail);
+        campoPassword.addEventListener('input', validarPassword);
+
+        formLogin.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const emailOk = validarEmail();
+            const passwordOk = validarPassword();
+
+            if (!(emailOk && passwordOk)) {
+                mensajeLogin.textContent = 'Por favor corrige los errores del formulario.';
+                mensajeLogin.className = 'mensaje-form fallo';
+                return;
+            }
+
+            const usuarios = JSON.parse(localStorage.getItem('bookcecUsuarios')) || [];
+            const email = campoEmail.value.trim().toLowerCase();
+            const password = campoPassword.value;
+
+            const usuarioValido = usuarios.find(
+                u => u.email.toLowerCase() === email && u.password === password
+            );
+
+            if (!usuarioValido) {
+                mensajeLogin.textContent = 'Correo o contraseña incorrectos.';
+                mensajeLogin.className = 'mensaje-form fallo';
+                return;
+            }
+
+            localStorage.setItem('bookcecUsuarioActivo', JSON.stringify({
+                nombre: usuarioValido.nombre,
+                email: usuarioValido.email
+            }));
+
+            mensajeLogin.textContent = '¡Bienvenido, ' + usuarioValido.nombre + '! Redirigiendo...';
+            mensajeLogin.className = 'mensaje-form exito';
+
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1200);
+        });
+    </script>
 </body>
 </html>
