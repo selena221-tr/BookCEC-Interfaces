@@ -130,3 +130,31 @@ function cambiarEstadoLibro(id, nuevoEstado) {
     guardarLibros(libros); // Guarda el cambio
     return libro; // Devuelve el libro actualizado
 }
+
+// Edita los datos de un libro existente y persiste el cambio.
+// datosNuevos = { nombre, nivel, condicion, precio, imagen, estado } - imagen y estado son opcionales
+// Si no se sube una imagen nueva, conserva la que ya tenía.
+// Si no se envía estado, conserva el que ya tenía.
+// Devuelve el libro actualizado, o null si no existía.
+function editarLibro(id, datosNuevos) {
+    const libros = cargarLibros(); // Obtiene los libros actuales
+    const libro = libros.find(l => l.id === id); // Busca el libro por id
+
+    if (!libro) return null; // Verifica que exista
+
+    libro.nombre = datosNuevos.nombre; // Actualiza el nombre
+    libro.nivel = datosNuevos.nivel; // Actualiza el nivel
+    libro.condicion = datosNuevos.condicion; // Actualiza la condición
+    libro.precio = Number(datosNuevos.precio); // Actualiza el precio
+
+    if (datosNuevos.imagen) {
+        libro.imagen = datosNuevos.imagen; // Solo cambia la imagen si subieron una nueva
+    }
+
+    if (datosNuevos.estado) {
+        libro.estado = datosNuevos.estado; // Solo cambia el estado si se envió uno nuevo
+    }
+
+    guardarLibros(libros); // Guarda el cambio
+    return libro; // Devuelve el libro actualizado
+}

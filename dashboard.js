@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setupFiltros(); // Activa los filtros
     setupSidebarActivo(); // Activa el menú lateral
     setupPublicar(); // Configura el formulario
+    setupEditar(); // Configura la edición de libros
 });
 
 function renderCards() {
@@ -67,7 +68,7 @@ function renderTabla(data) {
     }
 
     tbody.innerHTML = data.map(libro => `
-        <tr>
+        <tr class="fila-editable" data-editar="${libro.id}" title="Clic para editar">
             <td>${libro.nombre}</td>
             <td>${libro.nivel}</td>
             <td>${libro.condicion}</td>
@@ -135,6 +136,97 @@ function setupPublicar() {
         form.reset(); // Limpia el formulario
         preview.classList.add("d-none"); // Oculta la vista previa
         fotoBase64 = ""; // Borra la imagen temporal
+
+        if (modalEl) {
+            const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl); // Obtiene el modal
+            modal.hide(); // Cierra el modal
+        }
+    });
+}
+
+/* ---------- 5. EDITAR LIBRO EXISTENTE (modal) ---------- */
+
+function setupEditar() {
+    const tbody = document.getElementById("tablaLibros"); // Tabla de libros
+    const form = document.getElementById("formEditar"); // Formulario de edición
+    const fotoInput = document.getElementById("fotoLibroEditar"); // Selector de imagen
+    const preview = document.getElementById("previewFotoEditar"); // Vista previa
+    const modalEl = document.getElementById("modalEditar"); // Modal
+
+    if (!tbody || !form) return; // Verifica que existan
+
+    let fotoBase64Editar = ""; // Guarda la nueva imagen en Base64 (si se cambia)
+
+    // Detecta el clic en cualquier fila de la tabla (delegación de eventos,
+    // porque las filas se regeneran cada vez que se filtra o se agrega un libro)
+    tbody.addEventListener("click", (e) => {
+        const fila = e.target.closest("[data-editar]"); // Busca la fila presionada
+        if (!fila) return; // Sale si no fue una fila editable
+
+        const id = Number(fila.dataset.editar); // Obtiene el id del libro
+        const libro = booksData.find(l => l.id === id); // Busca el libro en memoria
+        if (!libro) return; // Verifica que exista
+
+        // Rellena el formulario con los datos actuales del libro
+        document.getElementById("editarLibroId").value = libro.id;
+        document.getElementById("nombreLibroEditar").value = libro.nombre;
+        document.getElementById("nivelLibroEditar").value = libro.nivel;
+        document.getElementById("condicionLibroEditar").value = libro.condicion;
+        document.getElementById("precioLibroEditar").value = libro.precio;
+        document.getElementById("estadoLibroEditar").value = libro.estado;
+
+        fotoBase64Editar = ""; // Reinicia la imagen temporal
+
+        if (libro.imagen) {
+            preview.src = libro.imagen; // Muestra la imagen actual
+            preview.classList.remove("d-none");
+        } else {
+            preview.classList.add("d-none");
+        }
+
+        if (modalEl) {
+            const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl); // Obtiene el modal
+            modal.show(); // Abre el modal
+        }
+    });
+
+    // Vista previa de la imagen nueva (si el usuario elige otra)
+    fotoInput?.addEventListener("change", () => {
+        const archivo = fotoInput.files[0]; // Obtiene el archivo
+        if (!archivo) return; // Verifica que exista
+
+        const lector = new FileReader(); // Crea el lector
+        lector.onload = (e) => {
+            fotoBase64Editar = e.target.result; // Guarda la nueva imagen
+            preview.src = fotoBase64Editar; // Actualiza la vista previa
+            preview.classList.remove("d-none"); // Muestra la imagen
+        };
+        lector.readAsDataURL(archivo); // Convierte el archivo a Base64
+    });
+
+    // Guarda los cambios al enviar el formulario
+    form.addEventListener("submit", (e) => {
+        e.preventDefault(); // Evita recargar la página
+
+        const id = Number(document.getElementById("editarLibroId").value); // Id del libro editado
+        const nombre = document.getElementById("nombreLibroEditar").value.trim(); // Nombre
+        const nivel = document.getElementById("nivelLibroEditar").value; // Nivel
+        const condicion = document.getElementById("condicionLibroEditar").value; // Condición
+        const precio = document.getElementById("precioLibroEditar").value; // Precio
+        const estado = document.getElementById("estadoLibroEditar").value; // Estado
+
+        if (!nombre || !nivel || !condicion || !precio || !estado) return; // Valida los datos
+
+        editarLibro(id, { nombre, nivel, condicion, precio, estado, imagen: fotoBase64Editar }); // Aplica los cambios
+
+        booksData = obtenerLibros(); // Recarga los datos
+        renderCards(); // Actualiza las tarjetas
+        aplicarFiltros(); // Actualiza la tabla
+        actualizarChart(); // Actualiza el gráfico
+
+        form.reset(); // Limpia el formulario
+        preview.classList.add("d-none"); // Oculta la vista previa
+        fotoBase64Editar = ""; // Borra la imagen temporal
 
         if (modalEl) {
             const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl); // Obtiene el modal

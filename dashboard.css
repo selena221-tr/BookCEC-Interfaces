@@ -194,6 +194,12 @@ body {
     background-color: #385231;
 }
 
+/* FILA EDITABLE (clic para editar) */
+
+.fila-editable {
+    cursor: pointer;
+}
+
 /* CHART */
 
 .chart-section {
