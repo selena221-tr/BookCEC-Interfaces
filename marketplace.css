@@ -99,6 +99,37 @@
     color: #6b7f1d;
 }
 
+/* BOTÓN COMPRAR / VENDIDO */
+.btn-comprar{
+    background: #4a6741;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    transition: 0.3s;
+}
+
+.btn-comprar:hover{
+    background: #385231;
+}
+
+.btn-comprar:disabled{
+    background: #b7c2b3;
+    color: #f4f7f4;
+    cursor: not-allowed;
+}
+
+/* MENSAJE "SIN RESULTADOS" DEL GRID */
+.market-grid > p{
+    grid-column: 1 / -1;
+    color: #6c757d;
+    font-size: 18px;
+    padding: 40px 0;
+}
+
 /* RESPONSIVE MARKETPLACE */
 @media (max-width: 900px){
     .market-grid{

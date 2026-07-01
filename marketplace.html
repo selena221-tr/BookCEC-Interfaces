@@ -40,9 +40,9 @@
         </section>
 
         <section class="market-filters">
-            <input type="text" placeholder="Buscar libro..." class="search-input">
+            <input type="text" id="buscarLibroMarket" placeholder="Buscar libro..." class="search-input">
 
-            <select class="filter-select">
+            <select id="filtroNivelMarket" class="filter-select">
                 <option value="">Nivel</option>
                 <option value="A1">A1</option>
                 <option value="A2">A2</option>
@@ -52,97 +52,36 @@
                 <option value="C2">C2</option>
             </select>
 
-            <select class="filter-select">
+            <select id="filtroCondicionMarket" class="filter-select">
                 <option value="">Condición</option>
-                <option value="nuevo">Nuevo</option>
-                <option value="usado">Usado</option>
-                <option value="subrayado">Subrayado</option>
+                <option value="Nuevo">Nuevo</option>
+                <option value="Usado">Usado</option>
+                <option value="Subrayado">Subrayado</option>
             </select>
 
-            <select class="filter-select">
+            <select id="filtroPrecioMarket" class="filter-select">
                 <option value="">Precio</option>
                 <option value="0-10">$0 - $10</option>
                 <option value="10-20">$10 - $20</option>
                 <option value="20-50">$20 - $50</option>
             </select>
 
-            <button class="btn-filtrar">Filtrar</button>
+            <button id="btnFiltrar" class="btn-filtrar">Filtrar</button>
         </section>
 
-        <section class="market-grid">
-
-            <div class="market-card">
-                <img src="imagenes/libro1.png" alt="Libro">
-                <div class="market-info">
-                    <h3>Interchange 5th Edition</h3>
-                    <p><strong>Nivel:</strong> B1</p>
-                    <p><strong>Condición:</strong> Como nuevo</p>
-                    <p class="price">$15</p>
-                    <button class="btn-comprar">Ver detalles</button>
-                </div>
-            </div>
-
-            <div class="market-card">
-                <img src="imagenes/libro2.png" alt="Libro">
-                <div class="market-info">
-                    <h3>Interchange 5th Edition</h3>
-                    <p><strong>Nivel:</strong> A3</p>
-                    <p><strong>Condición:</strong> Usado</p>
-                    <p class="price">$10</p>
-                    <button class="btn-comprar">Ver detalles</button>
-                </div>
-            </div>
-
-            <div class="market-card">
-                <img src="imagenes/libro3.png" alt="Libro">
-                <div class="market-info">
-                    <h3>Interchange 5th Edition</h3>
-                    <p><strong>Nivel:</strong> A1</p>
-                    <p><strong>Condición:</strong> Nuevo</p>
-                    <p class="price">$25</p>
-                    <button class="btn-comprar">Ver detalles</button>
-                </div>
-            </div>
-
-            <div class="market-card">
-                <img src="imagenes/libro4.png" alt="Libro">
-                <div class="market-info">
-                    <h3>Interchange 5th Edition</h3>
-                    <p><strong>Nivel:</strong> B2</p>
-                    <p><strong>Condición:</strong> Subrayado</p>
-                    <p class="price">$8</p>
-                    <button class="btn-comprar">Ver detalles</button>
-                </div>
-            </div>
-
-            <div class="market-card">
-                <img src="imagenes/libro2.png" alt="Libro">
-                <div class="market-info">
-                    <h3>Vocabulary Builder</h3>
-                    <p><strong>Nivel:</strong> C1</p>
-                    <p><strong>Condición:</strong> Usado</p>
-                    <p class="price">$18</p>
-                    <button class="btn-comprar">Ver detalles</button>
-                </div>
-            </div>
-
-            <div class="market-card">
-                <img src="imagenes/libro3.png" alt="Libro">
-                <div class="market-info">
-                    <h3>TOEFL Preparation</h3>
-                    <p><strong>Nivel:</strong> C2</p>
-                    <p><strong>Condición:</strong> Como nuevo</p>
-                    <p class="price">$30</p>
-                    <button class="btn-comprar">Ver detalles</button>
-                </div>
-            </div>
-
+        <!-- Las tarjetas ya no están quemadas: marketplace.js las
+             genera dinámicamente a partir de book-store.js -->
+        <section class="market-grid" id="marketGrid">
         </section>
     </main>
 
     <footer class="footer">
         <p>&copy; 2026 Book CEC. Todos los derechos reservados.</p>
     </footer>
+
+    <!-- Datos compartidos con el dashboard -->
+    <script src="book-store.js"></script>
+    <script src="marketplace.js"></script>
 
 </body>
 </html>
