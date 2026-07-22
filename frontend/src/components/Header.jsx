@@ -4,10 +4,13 @@ import { useAuth } from "../context/AuthContext";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { currentUser, logout } = useAuth();
+  const { currentUser, userProfile, logout } = useAuth();
   const navigate = useNavigate();
 
+  const nombre = userProfile?.nombre || currentUser?.displayName || "Usuario";
+
   async function handleLogout() {
+    setMenuOpen(false);
     await logout();
     navigate("/login");
   }
@@ -54,10 +57,15 @@ export default function Header() {
           <li>
             <Link to="/marketplace" onClick={() => setMenuOpen(false)}>Marketplace</Link>
           </li>
+
           {currentUser ? (
             <>
               <li>
                 <Link to="/dashboard" onClick={() => setMenuOpen(false)}>Dashboard</Link>
+              </li>
+              <li className="nav-user-info">
+                <i className="bi bi-person-circle"></i>
+                <span>{nombre}</span>
               </li>
               <li>
                 <button className="nav-logout-btn" onClick={handleLogout}>
@@ -66,9 +74,16 @@ export default function Header() {
               </li>
             </>
           ) : (
-            <li>
-              <Link to="/login" onClick={() => setMenuOpen(false)}>Login</Link>
-            </li>
+            <>
+              <li>
+                <Link to="/login" onClick={() => setMenuOpen(false)}>Iniciar Sesión</Link>
+              </li>
+              <li>
+                <Link to="/register" className="nav-register-btn" onClick={() => setMenuOpen(false)}>
+                  Registrarse
+                </Link>
+              </li>
+            </>
           )}
         </ul>
       </nav>

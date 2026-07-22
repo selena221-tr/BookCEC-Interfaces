@@ -1,5 +1,4 @@
-export default function BookCard({ libro, onBuy }) {
-  const esVendido = libro.estado === "Vendido";
+export default function BookCard({ libro, onBuy, currentUser }) {
   const imagenSrc = libro.imagen || "/imagenes/libro1.png";
 
   return (
@@ -14,13 +13,21 @@ export default function BookCard({ libro, onBuy }) {
           <strong>Condición:</strong> {libro.condicion}
         </p>
         <p className="price">${libro.precio}</p>
-        {libro.estado === "Disponible" ? (
-          <button className="btn-comprar" onClick={() => onBuy(libro)}>
-            Comprar
-          </button>
-        ) : (
+
+        {libro.estado !== "Disponible" ? (
           <button className="btn-comprar" disabled>
             {libro.estado}
+          </button>
+        ) : !currentUser ? (
+          <button
+            className="btn-comprar btn-login-required"
+            onClick={() => onBuy(libro)}
+          >
+            <i className="bi bi-lock-fill"></i> Inicia sesión para comprar
+          </button>
+        ) : (
+          <button className="btn-comprar" onClick={() => onBuy(libro)}>
+            Comprar
           </button>
         )}
       </div>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { subscribeToBooks, buyBook } from "../services/bookService";
+import { subscribeToBooks } from "../services/bookService";
+import { crearPeticion } from "../services/peticionesService";
 import { useAuth } from "../context/AuthContext";
 import BookCard from "../components/BookCard";
 
@@ -49,10 +50,20 @@ export default function Marketplace() {
       alert("No puedes comprar tu propio libro.");
       return;
     }
-    await buyBook(libro.firestoreId, libro.estado, currentUser.uid, currentUser.displayName || currentUser.email);
-    alert(`¡Compraste "${libro.nombre}"! Ya aparece como vendido.`);
-    if (returnTo === "dashboard") {
-      navigate("/dashboard");
+    try {
+      await crearPeticion({
+        libroFirestoreId: libro.firestoreId,
+        libroNombre: libro.nombre,
+        vendedorId: libro.user_id,
+        compradorUid: currentUser.uid,
+        compradorNombre: currentUser.displayName || currentUser.email,
+      });
+      alert(`Se envió tu solicitud para "${libro.nombre}". El vendedor debe aceptarla.`);
+      if (returnTo === "dashboard") {
+        navigate("/dashboard");
+      }
+    } catch (err) {
+      alert(err.message);
     }
   }
 
