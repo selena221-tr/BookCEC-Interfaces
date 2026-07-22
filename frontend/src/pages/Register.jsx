@@ -22,53 +22,59 @@ export default function Register() {
     setSuccess("");
 
     if (!nombre.trim()) {
-      setError("El nombre es obligatorio.");
+      setError({ title: "Nombre requerido", msg: "Ingresa tu nombre completo para crear tu cuenta." });
       return;
     }
     if (!regexNombre.test(nombre)) {
-      setError("Ingrese un nombre válido (mínimo 3 letras, sin números).");
+      setError({ title: "Nombre inválido", msg: "El nombre debe tener al menos 3 letras y no puede contener números ni caracteres especiales." });
       return;
     }
     if (!email.trim()) {
-      setError("El correo es obligatorio.");
+      setError({ title: "Correo requerido", msg: "Ingresa tu dirección de correo electrónico." });
       return;
     }
     if (!regexEmail.test(email)) {
-      setError("Ingrese un correo electrónico válido.");
+      setError({ title: "Correo inválido", msg: "El formato del correo no es válido. Ejemplo: usuario@dominio.com" });
       return;
     }
     if (!password) {
-      setError("La contraseña es obligatoria.");
+      setError({ title: "Contraseña requerida", msg: "Crea una contraseña para proteger tu cuenta." });
       return;
     }
     if (password.length < 6) {
-      setError("Debe tener al menos 6 caracteres.");
+      setError({ title: "Contraseña débil", msg: "La contraseña debe tener al menos 6 caracteres. Recomendamos incluir letras, números y símbolos." });
+      return;
+    }
+    if (password.length > 0 && password.length < 8) {
+      setError({ title: "Contraseña poco segura", msg: "Para mayor seguridad, usa al menos 8 caracteres con una combinación de letras, números y símbolos." });
       return;
     }
     if (password !== confirmPassword) {
-      setError("Las contraseñas no coinciden.");
+      setError({ title: "Las contraseñas no coinciden", msg: "Verifica que ambas contraseñas sean idénticas. Revisa si hay errores de escritura." });
       return;
     }
 
     try {
       setLoading(true);
       await register(email, password, nombre);
-      setSuccess("¡Cuenta creada con éxito! Redirigiendo a inicio de sesión...");
-      setTimeout(() => navigate("/login"), 1500);
+      setSuccess({ title: "¡Cuenta creada!", msg: "Tu registro fue exitoso. Serás redirigido al inicio de sesión en unos segundos..." });
+      setTimeout(() => navigate("/login"), 2000);
     } catch (err) {
       console.error("Error de registro:", err.code, err.message);
       if (err.code === "auth/email-already-in-use") {
-        setError("Este correo ya está registrado.");
+        setError({ title: "Correo ya registrado", msg: "Ya existe una cuenta asociada a este correo. Intenta con otro correo o inicia sesión." });
       } else if (err.code === "auth/invalid-email") {
-        setError("El correo electrónico no es válido.");
+        setError({ title: "Correo inválido", msg: "La dirección de correo electrónico no tiene un formato válido." });
       } else if (err.code === "auth/weak-password") {
-        setError("La contraseña debe tener al menos 6 caracteres.");
+        setError({ title: "Contraseña débil", msg: "La contraseña debe tener al menos 6 caracteres. Usa una combinación de letras, números y símbolos." });
       } else if (err.code === "auth/network-request-failed") {
-        setError("Error de red. Verifica tu conexión a internet.");
+        setError({ title: "Sin conexión", msg: "No se pudo conectar con el servidor. Verifica tu conexión a internet e intenta de nuevo." });
       } else if (err.code === "auth/api-key-not-valid.-please-pass-a-valid-api-key.") {
-        setError("Error de configuración Firebase. Verifica las credenciales en firebase.js");
+        setError({ title: "Error de configuración", msg: "Hay un problema con la configuración de Firebase. Contacta al administrador." });
+      } else if (err.code === "auth/operation-not-allowed") {
+        setError({ title: "Registro no disponible", msg: "El registro con correo y contraseña no está habilitado. Contacta al administrador." });
       } else {
-        setError(`Error: ${err.code}`);
+        setError({ title: "Error inesperado", msg: `Ocurrió un error (${err.code}). Intenta de nuevo o contacta al soporte.` });
       }
     } finally {
       setLoading(false);
@@ -79,24 +85,16 @@ export default function Register() {
     <main className="bienve">
       <div className="fila-superior">
         <img src="/imagenes/logo.png" className="libro-img" alt="logo" />
-        <div className="text">
-          <h1>Registrate</h1>
-          <p>
-            Crea tu cuenta, te llevará menos de un minuto
-            <br />
-            Si ya tienes una cuenta{" "}
-            <a href="/login" style={{ color: "#2b5c3d", fontWeight: "bold" }}>
-              Inicia Sesión
-            </a>
-          </p>
-        </div>
-        <img src="/imagenes/logo.png" className="libro-img" alt="logo" />
+      </div>
+
+      <div className="text-login">
+        <h1>Crear cuenta</h1>
+        <p>Regístrate para comenzar a usar BookCEC</p>
       </div>
 
       <div className="ingres">
         <form className="formula" onSubmit={handleSubmit} noValidate>
           <div className="input-group">
-            <span className="icon">👤</span>
             <input
               type="text"
               placeholder="Nombres completos"
@@ -106,17 +104,15 @@ export default function Register() {
           </div>
 
           <div className="input-group">
-            <span className="icon">✉</span>
             <input
               type="email"
-              placeholder="Email"
+              placeholder="Correo electrónico"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
           <div className="input-group">
-            <span className="icon">🔒</span>
             <input
               type="password"
               placeholder="Contraseña"
@@ -126,7 +122,6 @@ export default function Register() {
           </div>
 
           <div className="input-group">
-            <span className="icon">🔒</span>
             <input
               type="password"
               placeholder="Confirmar contraseña"
@@ -135,12 +130,34 @@ export default function Register() {
             />
           </div>
 
-          {error && <p className="mensaje-form fallo">{error}</p>}
-          {success && <p className="mensaje-form exito">{success}</p>}
+          {error && (
+            <div className="mensaje-form fallo">
+              <span className="alert-icon">⚠️</span>
+              <div className="alert-text">
+                <strong>{error.title}</strong>
+                <span>{error.msg}</span>
+              </div>
+            </div>
+          )}
+
+          {success && (
+            <div className="mensaje-form exito">
+              <span className="alert-icon">✅</span>
+              <div className="alert-text">
+                <strong>{success.title}</strong>
+                <span>{success.msg}</span>
+              </div>
+            </div>
+          )}
 
           <button type="submit" className="btn-iniciar" disabled={loading}>
-            {loading ? "Creando..." : "¡Hecho!"}
+            {loading ? "Creando cuenta..." : "Crear cuenta"}
           </button>
+
+          <p className="login-link">
+            ¿Ya tienes cuenta?{" "}
+            <a href="/login">Inicia sesión</a>
+          </p>
         </form>
       </div>
     </main>

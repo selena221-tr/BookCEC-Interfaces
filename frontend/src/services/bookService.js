@@ -8,6 +8,7 @@ import {
   onSnapshot,
   query,
   orderBy,
+  where,
 } from "firebase/firestore";
 import { db } from "./firebase";
 
@@ -20,6 +21,22 @@ export function subscribeToBooks(callback) {
       firestoreId: d.id,
       ...d.data(),
     }));
+    callback(books);
+  });
+}
+
+export function subscribeToUserBooks(userId, callback) {
+  const q = query(
+    collection(db, COLLECTION_NAME),
+    where("user_id", "==", userId)
+  );
+  return onSnapshot(q, (snapshot) => {
+    const books = snapshot.docs
+      .map((d) => ({
+        firestoreId: d.id,
+        ...d.data(),
+      }))
+      .sort((a, b) => (a.id ?? 0) - (b.id ?? 0));
     callback(books);
   });
 }
@@ -47,6 +64,7 @@ export async function addBook(bookData) {
     precio: Number(bookData.precio),
     estado: "Disponible",
     imagen: bookData.imagen || "",
+    user_id: bookData.user_id || null,
     createdAt: new Date().toISOString(),
   };
 
@@ -71,10 +89,14 @@ export async function deleteBook(firestoreId) {
   await deleteDoc(doc(db, COLLECTION_NAME, firestoreId));
 }
 
-export async function buyBook(firestoreId, currentStatus) {
+export async function buyBook(firestoreId, currentStatus, buyerUid = null, buyerName = null) {
   if (currentStatus !== "Disponible") return null;
   const bookRef = doc(db, COLLECTION_NAME, firestoreId);
-  await updateDoc(bookRef, { estado: "Vendido" });
+  const updateData = { estado: "Vendido" };
+  if (buyerUid) updateData.comprador_uid = buyerUid;
+  if (buyerName) updateData.comprador_nombre = buyerName;
+  updateData.vendidoEn = new Date().toISOString();
+  await updateDoc(bookRef, updateData);
 }
 
 export async function changeBookStatus(firestoreId, nuevoEstado) {

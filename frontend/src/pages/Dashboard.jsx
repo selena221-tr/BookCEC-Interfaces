@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import {
-  subscribeToBooks,
+  subscribeToUserBooks,
   addBook,
   updateBook,
+  deleteBook,
 } from "../services/bookService";
 import {
   subscribeToUsuarios,
@@ -19,7 +20,7 @@ import ModalEditarUsuario from "../components/ModalEditarUsuario";
 const NIVELES = ["A1", "A2", "B1", "B2", "C1", "C2"];
 
 export default function Dashboard() {
-  const { userProfile } = useAuth();
+  const { currentUser, userProfile } = useAuth();
   const isAdmin = userProfile?.rol === "admin";
 
   const [activeTab, setActiveTab] = useState("libros");
@@ -41,7 +42,8 @@ export default function Dashboard() {
   const [editingUsuario, setEditingUsuario] = useState(null);
 
   useEffect(() => {
-    const unsubscribeBooks = subscribeToBooks((data) => {
+    if (!currentUser) return;
+    const unsubscribeBooks = subscribeToUserBooks(currentUser.uid, (data) => {
       setBooks(data);
       setFilteredBooks(data);
     });
@@ -56,7 +58,7 @@ export default function Dashboard() {
       unsubscribeBooks();
       if (unsubscribeUsers) unsubscribeUsers();
     };
-  }, [isAdmin]);
+  }, [currentUser, isAdmin]);
 
   useEffect(() => {
     const result = books.filter((libro) => {
@@ -93,7 +95,7 @@ export default function Dashboard() {
   }
 
   async function handlePublicar(bookData) {
-    await addBook(bookData);
+    await addBook({ ...bookData, user_id: currentUser.uid });
   }
 
   async function handleEditar(firestoreId, bookData) {
@@ -103,6 +105,11 @@ export default function Dashboard() {
   function handleEditClick(libro) {
     setEditingBook(libro);
     setShowEditar(true);
+  }
+
+  async function handleDeleteBook(firestoreId, nombre) {
+    const ok = window.confirm(`¿Eliminar el libro "${nombre}"?`);
+    if (ok) await deleteBook(firestoreId);
   }
 
   async function handleEditarUsuario(firestoreId, data) {
@@ -156,9 +163,18 @@ export default function Dashboard() {
     });
   }
 
+  function handleTabChange(tab) {
+    setActiveTab(tab);
+    setTimeout(() => {
+      const targetId = tab === "usuarios" ? "tabla-usuarios" : "tabla";
+      const el = document.getElementById(targetId);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 100);
+  }
+
   return (
     <div>
-      <Sidebar />
+      <Sidebar onTabChange={handleTabChange} />
 
       <div className="main-content">
         <Topbar />
@@ -270,12 +286,13 @@ export default function Dashboard() {
                     <th>Condición</th>
                     <th>Precio</th>
                     <th>Estado</th>
+                    <th className="text-center">Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
                   {filteredBooks.length === 0 ? (
                     <tr>
-                      <td colSpan="5" className="text-center text-muted py-4">
+                      <td colSpan="6" className="text-center text-muted py-4">
                         No se encontraron libros con esos criterios.
                       </td>
                     </tr>
@@ -292,6 +309,18 @@ export default function Dashboard() {
                         <td>{libro.condicion}</td>
                         <td>${libro.precio}</td>
                         <td>{badgeEstado(libro.estado)}</td>
+                        <td className="text-center">
+                          <button
+                            className="btn-accion-eliminar"
+                            title="Eliminar libro"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleDeleteBook(libro.firestoreId, libro.nombre);
+                            }}
+                          >
+                            <i className="bi bi-trash-fill"></i>
+                          </button>
+                        </td>
                       </tr>
                     ))
                   )}

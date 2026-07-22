@@ -1,12 +1,18 @@
 import { useState, useEffect } from "react";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { subscribeToBooks, buyBook } from "../services/bookService";
+import { useAuth } from "../context/AuthContext";
 import BookCard from "../components/BookCard";
 
 export default function Marketplace() {
+  const { currentUser } = useAuth();
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const returnTo = searchParams.get("return");
   const [books, setBooks] = useState([]);
   const [filteredBooks, setFilteredBooks] = useState([]);
   const [searchText, setSearchText] = useState("");
-  const [filterNivel, setFilterNivel] = useState("");
+  const [filterNivel, setFilterNivel] = useState(searchParams.get("nivel") || "");
   const [filterCondicion, setFilterCondicion] = useState("");
   const [filterPrecio, setFilterPrecio] = useState("");
 
@@ -35,8 +41,19 @@ export default function Marketplace() {
 
   async function handleBuy(libro) {
     if (libro.estado !== "Disponible") return;
-    await buyBook(libro.firestoreId, libro.estado);
+    if (!currentUser) {
+      alert("Debes iniciar sesión para comprar un libro.");
+      return;
+    }
+    if (libro.user_id === currentUser.uid) {
+      alert("No puedes comprar tu propio libro.");
+      return;
+    }
+    await buyBook(libro.firestoreId, libro.estado, currentUser.uid, currentUser.displayName || currentUser.email);
     alert(`¡Compraste "${libro.nombre}"! Ya aparece como vendido.`);
+    if (returnTo === "dashboard") {
+      navigate("/dashboard");
+    }
   }
 
   return (
@@ -44,6 +61,14 @@ export default function Marketplace() {
       <section className="market-hero">
         <h1>Marketplace de Libros</h1>
         <p>Encuentra libros usados del CEC según tu nivel y al mejor precio.</p>
+        {returnTo === "dashboard" && currentUser && (
+          <button
+            className="btn-marketplace-back"
+            onClick={() => navigate("/dashboard")}
+          >
+            <i className="bi bi-arrow-left-circle"></i> Volver al Dashboard
+          </button>
+        )}
       </section>
 
       <section className="market-filters">

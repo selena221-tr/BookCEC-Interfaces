@@ -13,16 +13,31 @@ import Marketplace from "./pages/Marketplace";
 import Nosotros from "./pages/Nosotros";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./styles/global.css";
 import "./styles/app.css";
 
 function PublicLayout({ children }) {
   return (
-    <>
+    <div className="page-wrapper">
       <Header />
-      {children}
+      <div className="page-content">
+        {children}
+      </div>
       <Footer />
-    </>
+    </div>
+  );
+}
+
+function AuthLayout({ children }) {
+  return (
+    <div className="page-wrapper">
+      <Header />
+      <div className="page-content auth-layout">
+        {children}
+      </div>
+      <Footer />
+    </div>
   );
 }
 
@@ -61,17 +76,17 @@ export default function App() {
           <Route
             path="/login"
             element={
-              <PublicLayout>
+              <AuthLayout>
                 <Login />
-              </PublicLayout>
+              </AuthLayout>
             }
           />
           <Route
             path="/register"
             element={
-              <PublicLayout>
+              <AuthLayout>
                 <Register />
-              </PublicLayout>
+              </AuthLayout>
             }
           />
 

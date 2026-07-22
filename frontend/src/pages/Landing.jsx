@@ -1,19 +1,32 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { subscribeToBooks } from "../services/bookService";
+
+const categoriasMap = {
+  Principiante: "A1",
+  Básico: "A2",
+  Intermedio: "B1",
+  Avanzado: "B2",
+  Académico: "C1",
+};
 
 export default function Landing() {
-  const categorias = ["Principiante", "Básico", "Intermedio", "Avanzado", "Académico"];
+  const categorias = Object.keys(categoriasMap);
+  const [librosDestacados, setLibrosDestacados] = useState([]);
 
-  const librosDestacados = [
-    { id: 1, nombre: "Intercambio 5.ª edición", condicion: "Nuevo", precio: 10, imagen: "/imagenes/libro4.png" },
-    { id: 2, nombre: "Intercambio 5.ª edición", condicion: "Nuevo", precio: 25, imagen: "/imagenes/libro3.png" },
-    { id: 3, nombre: "Intercambio 5.ª edición", condicion: "Nuevo", precio: 20, imagen: "/imagenes/libro2.png" },
-  ];
+  useEffect(() => {
+    const unsubscribe = subscribeToBooks((data) => {
+      const disponibles = data.filter((l) => l.estado === "Disponible");
+      const shuffle = disponibles.sort(() => 0.5 - Math.random());
+      setLibrosDestacados(shuffle.slice(0, 6));
+    });
+    return () => unsubscribe();
+  }, []);
 
   return (
     <main className="principal">
       {/* CAROUSEL */}
-      <div id="carouselExampleRide" className="carousel slide" data-bs-ride="carousel">
+      <div id="carouselExampleRide" className="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
         <div className="carousel-inner">
           <div className="carousel-item active">
             <img src="/imagenes/c3.png" className="d-block w-100" alt="Slide 1" />
@@ -42,6 +55,11 @@ export default function Landing() {
           <span className="carousel-control-next-icon" aria-hidden="true"></span>
           <span className="visually-hidden">Next</span>
         </button>
+        <div className="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleRide" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleRide" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleRide" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
       </div>
 
       {/* CATEGORÍAS */}
@@ -53,7 +71,9 @@ export default function Landing() {
         </div>
         <div className="botones">
           {categorias.map((cat) => (
-            <button key={cat}>{cat}</button>
+            <Link key={cat} to={`/marketplace?nivel=${categoriasMap[cat]}`}>
+              <button>{cat}</button>
+            </Link>
           ))}
         </div>
         <div className="final">
@@ -64,22 +84,31 @@ export default function Landing() {
       {/* LIBROS DESTACADOS */}
       <section className="libros-destacados">
         <h2>Libros Destacados</h2>
-        <div className="contenedor-libros">
-          {librosDestacados.map((libro) => (
-            <div className="tarjeta" key={libro.id}>
-              <div className="imagen">
-                <img src={libro.imagen} alt="libros" />
+        {librosDestacados.length === 0 ? (
+          <p className="text-center">No hay libros disponibles por el momento.</p>
+        ) : (
+          <div className="contenedor-libros">
+            {librosDestacados.map((libro) => (
+              <div className="tarjeta" key={libro.firestoreId}>
+                <div className="imagen">
+                  <img
+                    src={libro.imagen || "/imagenes/libro-placeholder.png"}
+                    alt={libro.nombre}
+                  />
+                </div>
+                <div className="texto">
+                  <h3>{libro.nombre}</h3>
+                  <p>
+                    Condición: {libro.condicion} <br /> Precio: ${libro.precio}
+                  </p>
+                  <Link to="/marketplace">
+                    <button>Comprar</button>
+                  </Link>
+                </div>
               </div>
-              <div className="texto">
-                <h3>{libro.nombre}</h3>
-                <p>
-                  Condición: {libro.condicion} <br /> Precio: ${libro.precio}
-                </p>
-                <button>Comprar</button>
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* SERVICIOS */}
@@ -87,12 +116,12 @@ export default function Landing() {
         <h2>Servicios</h2>
         <div className="contenedor-servicios">
           <div className="servicio-card">
-            <h3>Compra de libros</h3>
+            <h3 className="nowrap">Compra de libros</h3>
             <p>Encuentra libros usados de inglés por nivel y a precios accesibles.</p>
             <img src="/imagenes/servicio1.avif" alt="Servicio 1" />
           </div>
           <div className="servicio-card">
-            <h3>Venta de libros</h3>
+            <h3 className="nowrap">Venta de libros</h3>
             <p>Publica tu libro fácilmente y véndelo a otros estudiantes del CEC.</p>
             <img src="/imagenes/servicio2.webp" alt="Servicio 2" />
           </div>

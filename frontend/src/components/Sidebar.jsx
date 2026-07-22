@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
-export default function Sidebar() {
+export default function Sidebar({ onTabChange }) {
   const { logout, userProfile } = useAuth();
   const isAdmin = userProfile?.rol === "admin";
   const navigate = useNavigate();
@@ -9,6 +9,10 @@ export default function Sidebar() {
   async function handleLogout() {
     await logout();
     navigate("/login");
+  }
+
+  function handleTabClick(tab) {
+    if (onTabChange) onTabChange(tab);
   }
 
   return (
@@ -24,23 +28,28 @@ export default function Sidebar() {
         Inicio
       </NavLink>
 
-      <NavLink to="/marketplace">
+      <a href="#tabla" onClick={(e) => { e.preventDefault(); handleTabClick("libros"); }}>
         <i className="bi bi-book-fill"></i>
         Libros
-      </NavLink>
+      </a>
 
       <a href="#ventas">
         <i className="bi bi-bar-chart-fill"></i>
         Reportes
       </a>
 
-      <a href="#tabla">
+      <a href="#tabla" onClick={(e) => { e.preventDefault(); handleTabClick("libros"); }}>
         <i className="bi bi-cart-fill"></i>
         Ventas
       </a>
 
+      <a href="/marketplace?return=dashboard" onClick={(e) => { e.preventDefault(); navigate("/marketplace?return=dashboard"); }}>
+        <i className="bi bi-shop"></i>
+        Marketplace
+      </a>
+
       {isAdmin && (
-        <a href="#tabla-usuarios">
+        <a href="#tabla-usuarios" onClick={(e) => { e.preventDefault(); handleTabChange && handleTabChange("usuarios"); }}>
           <i className="bi bi-people-fill"></i>
           Usuarios
         </a>
